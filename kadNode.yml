@@ -11,9 +11,14 @@
   - name: run pre_tasks
     debug:
         msg: Execute command from pre_task
+  - name: Install required tools for compiling kadNode
+    package:
+      name: "git"
+      state: latest
+    ignore_errors: yes
 
   roles:
-   - { role: git-install}
+   #- { role: git-install}
    - { role: kadNode }
 
   tasks:

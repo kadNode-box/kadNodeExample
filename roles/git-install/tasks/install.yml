@@ -1,7 +1,7 @@
 # Install required software for compiling git from source
 #
 - name: Install required tools for compiling git
-  yum:
+  package:
     name: "{{ item }}"
     state: latest
   with_items:
@@ -13,6 +13,7 @@
     - kernel-headers
     - perl-devel # Dependencies: gdbm-devel glibc-devel glibc-headers kernel-headers libdb-devel perl perl-Carp perl-Encode perl-Exporter perl-ExtUtils-Install  perl-ExtUtils-MakeMaker perl-ExtUtils-Manifest perl-ExtUtils-ParseXS perl-File-Path perl-File-Temp perl-Filter perl-Getopt-Long perl-HTTP-Tiny perl-PathTools perl-Pod-Escapes perl-Pod-Perldoc perl-Pod-Simple perl-Pod-Usage perl-Scalar-List-Utils perl-Socket perl-Storable perl-Test-Harness perl-Text-ParseWords perl-Time-HiRes perl-Time-Local perl-constant perl-libs perl-macros perl-parent perl-podlators perl-threads perl-threads-shared pyparsing systemtap-sdt-devel
     - zlib-devel
+  ignore_errors: yes
   tags: [git, install]
 
 

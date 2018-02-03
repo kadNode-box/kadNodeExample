@@ -2,18 +2,19 @@
 # Install required software for compiling git from source
 #
 - name: Install required tools for compiling kadNode
-  yum:
+  package:
     name: "{{ item }}"
     state: latest
+  ignore_errors: yes
   with_items:
-    - autoconf # Dependencies: m4 perl perl-Carp perl-Data-Dumper perl-Encode perl-Exporter perl-File-Path perl-File-Temp perl-Filter perl-Getopt-Long perl-HTTP-Tiny perl-PathTools perl-Pod-Escapes perl-Pod-Perldoc perl-Pod-Simple perl-Pod-Usage perl-Scalar-List-Utils perl-Socket perl-Storable perl-Text-ParseWords perl-Time-HiRes perl-Time-Local perl-constant perl-libs perl-macros perl-parent perl-podlators perl-threads perl-threads-shared
-    - libcurl-devel
-    - expat-devel
-    - gcc # Dependencies: cpp glibc-devel glibc-headers kernel-headers libmpc mpfr
-    - gettext-devel # Dependencies: gettext-common-devel git libgnome-keyring perl perl-Carp perl-Encode perl-Error perl-Exporter perl-File-Path perl-File-Temp perl-Filter perl-Getopt-Long perl-Git perl-HTTP-Tiny perl-PathTools perl-Pod-Escapesperl-Pod-Perldoc perl-Pod-Simple perl-Pod-Usage perl-Scalar-List-Utils perl-Socket perl-Storable perl-TermReadKey perl-Text-ParseWords perl-Time-HiRes perl-Time-Local perl-constant perl-libs perl-macros perl-parent perl-podlators perl-threads perl-threads-shared
-    - kernel-headers
-    - perl-devel # Dependencies: gdbm-devel glibc-devel glibc-headers kernel-headers libdb-devel perl perl-Carp perl-Encode perl-Exporter perl-ExtUtils-Install  perl-ExtUtils-MakeMaker perl-ExtUtils-Manifest perl-ExtUtils-ParseXS perl-File-Path perl-File-Temp perl-Filter perl-Getopt-Long perl-HTTP-Tiny perl-PathTools perl-Pod-Escapes perl-Pod-Perldoc perl-Pod-Simple perl-Pod-Usage perl-Scalar-List-Utils perl-Socket perl-Storable perl-Test-Harness perl-Text-ParseWords perl-Time-HiRes perl-Time-Local perl-constant perl-libs perl-macros perl-parent perl-podlators perl-threads perl-threads-shared pyparsing systemtap-sdt-devel
-    - zlib-devel
+    - cmake
+    - wget
+    - openssl 
+    - mbedtls-dev
+    - libmbedtls-dev
+# 
+# wget -cqO- http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mbedtls-2.6.0-1.el7.x86_64.rpm | sudo rpm -i
+# sudo rpm -i http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mbedtls-2.6.0-1.el7.x86_64.rpm
   tags: [kadNode, install]
 
 
@@ -32,18 +33,31 @@
     repo: "https://github.com/mwarning/KadNode.git"
   tags: [kadNode, install]
 
+- name: checkout f164bdf kadNode sources
+  command: bash -lc "git checkout f164bdf"
+  args:
+    chdir: "{{kadNode_sources_location}}/KadNode"
+  ignore_errors: yes
+  register: result
+  tags: [kadNode, install]
+
+- debug: msg="{{ result.stdout_lines }}"
+- debug: msg="{{ result.stderr_lines }}"
+
+
 # Compile kadNode
 # It will be compiled by using different user than root.
 #
-- name: Compile git
+- name: Compile kadNode
   command: "{{ item }}"
   args:
     chdir: "{{ kadNode_sources_location }}/KadNode"
   with_items:
     - make clean
-    - make configure
-    - "./configure --prefix={{ kdNode_install_path }}"
     - make
+    #- make configure
+    #- "./configure --prefix={{ kadNode_install_path }}"
+    #- make
   become: true
 #  become_user: "{{ kadNode_build_user }}"
   tags: [kadNode, install]
@@ -51,7 +65,7 @@
 # Install compiled git
 # This operation must be executed as sudo user
 #
-- name: Install compiled git
+- name: Install compiled kadNode
   command: make install
   args:
     chdir: "{{ kadNode_sources_location }}/KadNode"
@@ -65,7 +79,7 @@
     state: absent
   with_items:
     - "{{ kadNode_sources_location }}/KadNode"
-    - "{{ kadNode_sources_location }}/KadNode"
+    #- "{{ kadNode_sources_location }}/KadNode"
   when: "kadNode_cleanup_after_install == true"
   tags: [kadNode, install]
 
