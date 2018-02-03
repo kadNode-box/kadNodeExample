@@ -1,0 +1,42 @@
+---
+# Check if kadNode is installed or not and if it should be updated or not
+#
+- name: Check if kadNode is installed
+  command: kadNode --version warn=no
+  register: kadNode_is_installed_test
+  ignore_errors: yes
+  changed_when: false
+  environment:
+    PATH: "{{ kadNode_install_path }}/bin:{{ ansible_env.PATH }}"
+  tags: [kadNode]
+
+- set_fact:
+    kadNode_is_installed: true
+  when: kadNode_is_installed_test.rc != 2
+  tags: [kadNode]
+
+- set_fact:
+    kadNode_is_installed: false
+    kadNode_install_new_version: true
+  when: kadNode_is_installed_test.rc == 2
+  tags: [kadNode]
+
+- set_fact:
+    kadNode_install_new_version: true
+  when: ( kadNode_is_installed == true ) and ( kadNode_is_installed_test.stdout | replace('kadNode version ','') != kadNode_version )
+  tags: [kadNode]
+
+- set_fact:
+    kadNode_install_new_version: false
+  when: ( kadNode_is_installed == true ) and ( kadNode_is_installed_test.stdout | replace('kadNode version ','') == kadNode_version )
+  tags: [kadNode]
+
+
+
+# Install/Update kadNode to desired version
+# These tasks will be executed when
+#  1. kadNode is not installed
+#  2. kadNode is installed but not in desired version
+#
+- include_tasks: install.yml
+  when: "kadNode_install_new_version == true"

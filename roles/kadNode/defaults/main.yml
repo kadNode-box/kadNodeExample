@@ -1,0 +1,22 @@
+---
+#
+# Set default values for varibles
+#
+
+# Version of kadNode that should be present in the system
+kadNode_version: "2.14.1"
+
+# Location of files for kadNode sources
+kadNode_sources_location: /usr/src
+
+# User that will build kadNode. Please never use root account for compiling software. It can lead to serious issues
+kadNode_build_user: developer
+
+# Group of the build user.
+kadNode_build_group: developer
+
+# Installation path for kadNode
+kadNode_install_path: /usr/local
+
+# Should downloaded source files be deleted after installation?
+kadNode_cleanup_after_install: yes

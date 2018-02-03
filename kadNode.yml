@@ -1,0 +1,27 @@
+---
+#
+# Seting up kadNode service
+#
+- hosts: all
+  become: yes
+  
+  vars:
+
+  pre_tasks:
+  - name: run pre_tasks
+    debug:
+        msg: Execute command from pre_task
+
+  roles:
+   - { role: git-install}
+   - { role: kadNode }
+
+  tasks:
+  - name: run tasks
+    debug:
+        msg: Execute command from task
+
+  post_tasks:
+  - name: run post_tasks
+    debug:
+        msg: Execute command from post_task
