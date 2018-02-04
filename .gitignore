@@ -4,3 +4,5 @@
 /target/
 /.settings/
 /.project
+mirror_to_github.sh
+/.origin
