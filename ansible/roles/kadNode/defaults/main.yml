@@ -3,6 +3,9 @@
 # Set default values for varibles
 #
 
+kadNode_git_commit: "f164bdf"
+kadNode_git_url: "https://github.com/mwarning/KadNode.git"
+
 # Version of kadNode that should be present in the system
 kadNode_version: "2.14.1"
 

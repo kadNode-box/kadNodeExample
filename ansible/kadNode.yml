@@ -19,7 +19,7 @@
 
   roles:
    #- { role: git-install}
-   - { role: kadNode }
+   - { role: kadNode , kadNode_git_commit="f164bdf"}
 
   tasks:
   - name: run tasks

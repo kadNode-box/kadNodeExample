@@ -30,11 +30,11 @@
   git:
     clone: yes
     dest: "{{ kadNode_sources_location }}/KadNode"
-    repo: "https://github.com/mwarning/KadNode.git"
+    repo: "{{ kadNode_git_url }}"
   tags: [kadNode, install]
 
-- name: checkout f164bdf kadNode sources
-  command: bash -lc "git checkout f164bdf"
+- name: checkout commit kadNode sources
+  command: bash -lc "git checkout {{kadNode_git_commit}}"
   args:
     chdir: "{{kadNode_sources_location}}/KadNode"
   ignore_errors: yes
