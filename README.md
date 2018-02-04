@@ -12,7 +12,9 @@ cd into subfolder centos or ubuntu
 
 ## Start VM and install kadNose from source with ansible
 run:
+
  vagrant up --provison
+ 
  vagrant destroy
 
 
