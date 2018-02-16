@@ -1,0 +1,91 @@
+#
+# List content of package
+#
+#
+
+apt-file list libmbedtls-dev
+
+sudo apt-get update
+                                                                              
+apt-file list libmbedtls-dev
+libmbedtls-dev: /usr/include/mbedtls/aes.h
+libmbedtls-dev: /usr/include/mbedtls/aesni.h
+libmbedtls-dev: /usr/include/mbedtls/arc4.h
+libmbedtls-dev: /usr/include/mbedtls/asn1.h
+libmbedtls-dev: /usr/include/mbedtls/asn1write.h
+libmbedtls-dev: /usr/include/mbedtls/base64.h
+libmbedtls-dev: /usr/include/mbedtls/bignum.h
+libmbedtls-dev: /usr/include/mbedtls/blowfish.h
+libmbedtls-dev: /usr/include/mbedtls/bn_mul.h
+libmbedtls-dev: /usr/include/mbedtls/camellia.h
+libmbedtls-dev: /usr/include/mbedtls/ccm.h
+libmbedtls-dev: /usr/include/mbedtls/certs.h
+libmbedtls-dev: /usr/include/mbedtls/check_config.h
+libmbedtls-dev: /usr/include/mbedtls/cipher.h
+libmbedtls-dev: /usr/include/mbedtls/cipher_internal.h
+libmbedtls-dev: /usr/include/mbedtls/cmac.h
+libmbedtls-dev: /usr/include/mbedtls/compat-1.3.h
+libmbedtls-dev: /usr/include/mbedtls/config.h
+libmbedtls-dev: /usr/include/mbedtls/ctr_drbg.h
+libmbedtls-dev: /usr/include/mbedtls/debug.h
+libmbedtls-dev: /usr/include/mbedtls/des.h
+libmbedtls-dev: /usr/include/mbedtls/dhm.h
+libmbedtls-dev: /usr/include/mbedtls/ecdh.h
+libmbedtls-dev: /usr/include/mbedtls/ecdsa.h
+libmbedtls-dev: /usr/include/mbedtls/ecjpake.h
+libmbedtls-dev: /usr/include/mbedtls/ecp.h
+libmbedtls-dev: /usr/include/mbedtls/ecp_internal.h
+libmbedtls-dev: /usr/include/mbedtls/entropy.h
+libmbedtls-dev: /usr/include/mbedtls/entropy_poll.h
+libmbedtls-dev: /usr/include/mbedtls/error.h
+libmbedtls-dev: /usr/include/mbedtls/gcm.h
+libmbedtls-dev: /usr/include/mbedtls/havege.h
+libmbedtls-dev: /usr/include/mbedtls/hmac_drbg.h
+libmbedtls-dev: /usr/include/mbedtls/md.h
+libmbedtls-dev: /usr/include/mbedtls/md2.h
+libmbedtls-dev: /usr/include/mbedtls/md4.h
+libmbedtls-dev: /usr/include/mbedtls/md5.h
+libmbedtls-dev: /usr/include/mbedtls/md_internal.h
+libmbedtls-dev: /usr/include/mbedtls/memory_buffer_alloc.h
+libmbedtls-dev: /usr/include/mbedtls/net.h
+libmbedtls-dev: /usr/include/mbedtls/net_sockets.h
+libmbedtls-dev: /usr/include/mbedtls/oid.h
+libmbedtls-dev: /usr/include/mbedtls/padlock.h
+libmbedtls-dev: /usr/include/mbedtls/pem.h
+libmbedtls-dev: /usr/include/mbedtls/pk.h
+libmbedtls-dev: /usr/include/mbedtls/pk_internal.h
+libmbedtls-dev: /usr/include/mbedtls/pkcs11.h
+libmbedtls-dev: /usr/include/mbedtls/pkcs12.h
+libmbedtls-dev: /usr/include/mbedtls/pkcs5.h
+libmbedtls-dev: /usr/include/mbedtls/platform.h
+libmbedtls-dev: /usr/include/mbedtls/platform_time.h
+libmbedtls-dev: /usr/include/mbedtls/ripemd160.h
+libmbedtls-dev: /usr/include/mbedtls/rsa.h
+libmbedtls-dev: /usr/include/mbedtls/sha1.h
+libmbedtls-dev: /usr/include/mbedtls/sha256.h
+libmbedtls-dev: /usr/include/mbedtls/sha512.h
+libmbedtls-dev: /usr/include/mbedtls/ssl.h
+libmbedtls-dev: /usr/include/mbedtls/ssl_cache.h
+libmbedtls-dev: /usr/include/mbedtls/ssl_ciphersuites.h
+libmbedtls-dev: /usr/include/mbedtls/ssl_cookie.h
+libmbedtls-dev: /usr/include/mbedtls/ssl_internal.h
+libmbedtls-dev: /usr/include/mbedtls/ssl_ticket.h
+libmbedtls-dev: /usr/include/mbedtls/threading.h
+libmbedtls-dev: /usr/include/mbedtls/timing.h
+libmbedtls-dev: /usr/include/mbedtls/version.h
+libmbedtls-dev: /usr/include/mbedtls/x509.h
+libmbedtls-dev: /usr/include/mbedtls/x509_crl.h
+libmbedtls-dev: /usr/include/mbedtls/x509_crt.h
+libmbedtls-dev: /usr/include/mbedtls/x509_csr.h
+libmbedtls-dev: /usr/include/mbedtls/xtea.h
+libmbedtls-dev: /usr/lib/x86_64-linux-gnu/libmbedcrypto.a
+libmbedtls-dev: /usr/lib/x86_64-linux-gnu/libmbedcrypto.so
+libmbedtls-dev: /usr/lib/x86_64-linux-gnu/libmbedtls.a
+libmbedtls-dev: /usr/lib/x86_64-linux-gnu/libmbedtls.so
+libmbedtls-dev: /usr/lib/x86_64-linux-gnu/libmbedx509.a
+libmbedtls-dev: /usr/lib/x86_64-linux-gnu/libmbedx509.so
+libmbedtls-dev: /usr/share/doc/libmbedtls-dev/changelog.Debian.gz
+libmbedtls-dev: /usr/share/doc/libmbedtls-dev/copyright
+
+
+

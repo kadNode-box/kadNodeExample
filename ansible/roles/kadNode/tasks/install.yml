@@ -10,11 +10,6 @@
     - cmake
     - wget
     - openssl 
-    - mbedtls-dev
-    - libmbedtls-dev
-# 
-# wget -cqO- http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mbedtls-2.6.0-1.el7.x86_64.rpm | sudo rpm -i
-# sudo rpm -i http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/m/mbedtls-2.6.0-1.el7.x86_64.rpm
   tags: [kadNode, install]
 
 
@@ -49,37 +44,37 @@
 # It will be compiled by using different user than root.
 #
 - name: Compile kadNode
-  command: "{{ item }}"
+  become: true
+  shell: |
+    make clean
+    make
+    exit 0
   args:
     chdir: "{{ kadNode_sources_location }}/KadNode"
-  with_items:
-    - make clean
-    - make
-    #- make configure
-    #- "./configure --prefix={{ kadNode_install_path }}"
-    #- make
-  become: true
-#  become_user: "{{ kadNode_build_user }}"
+  register: compile
   tags: [kadNode, install]
+
+- debug: msg="{{ compile.stdout_lines }}"
+- debug: msg="{{ compile.stderr_lines }}"
 
 # Install compiled git
 # This operation must be executed as sudo user
-#
 - name: Install compiled kadNode
-  command: make install
+  command: "make install"
   args:
     chdir: "{{ kadNode_sources_location }}/KadNode"
+  register: install
   tags: [kadNode, install]
 
-# Remove downloaded sources after installation
-#
-- name: Cleanup downloaded sources
+- debug: msg="{{ install.stdout_lines }}"
+- debug: msg="{{ install.stderr_lines }}"
+
+- name: Cleanup downloaded sources after installation
   file:
     path: "{{ item }}"
     state: absent
   with_items:
     - "{{ kadNode_sources_location }}/KadNode"
-    #- "{{ kadNode_sources_location }}/KadNode"
   when: "kadNode_cleanup_after_install == true"
   tags: [kadNode, install]
 

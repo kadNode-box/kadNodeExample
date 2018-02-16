@@ -1,0 +1,78 @@
+---
+#
+# Install CentOS spezific mbedtls 
+#
+
+#
+# https://github.com/ARMmbed/mbedtls
+# https://github.com/ARMmbed/mbedtls/blob/development/CMakeLists.txt
+# http://docs.yottabuild.org/#installing
+#
+#Version 	SHA-1 checksum
+#mbed TLS 2.7.0 (Apache) 	01ffebf679c8696cc941c41224fa73d8944d2c85
+#wget https://tls.mbed.org/download/mbedtls-2.7.0-apache.tgz
+#
+#mbed TLS 2.7.0 (GPL) 	aeb66d6cd43aa1c79c145d15845c655627a7fc30d624148aaafbb6c36d7f55ef
+#wget https://tls.mbed.org/download/mbedtls-2.7.0-gpl.tgz
+
+# fatal: [centos-server.locale]: FAILED! => {"changed": false, "msg":
+# "Failed to validate the SSL certificate for tls.mbed.org:443. Make sure your managed systems have a valid CA certificate installed. 
+# If the website serving the url uses SNI you need python >= 2.7.9 on your managed machine  
+# (the python executable used (/usr/bin/python) is version: 2.7.5 (default, Jun 17 2014, 18:11:42) [GCC 4.8.2 20140120 (Red Hat 4.8.2-16)]) or you can install the `urllib3`, `pyOpenSSL`, `ndg-httpsclient`, and `pyasn1` python modules to perform SNI verification in python >= 2.6. You can use validate_certs=False if you do not need to confirm the servers identity but this is unsafe and not recommended. Paths checked for this platform: /etc/ssl/certs, /etc/pki/ca-trust/extracted/pem, /etc/pki/tls/certs, /usr/share/ca-certificates/cacert.org, /etc/ansible. The exception msg was: hostname 'tls.mbed.org' doesn't match either of 'www.polarssl.org', 'polarssl.org'."}
+- name: Download mbedtls-2.x.x-gpl.tgz
+  get_url:
+    url: "{{mbedtls_src_url}}"
+    dest: "{{mbedtls_sources_location}}/{{mbedtls_file}}"
+    checksum: "sha1:{{mbedtls_file_sha1}}"
+    mode: "u=rw,g=rw,o=rw"
+
+#fatal: [centos-server.locale]: FAILED! => {"changed": false, 
+#"msg": "The checksum for /tmp/mbedtls-2.7.0-gpl.tgz did not match 
+#aeb66d6cd43aa1c79c145d15845c655627a7fc30d624148aaafbb6c36d7f55ef; it was 
+#6c8e62985c5a73318d391e1327830b3ff85f87a0."}
+
+#- name: Creates directory
+#  file: 
+#    path: "{{mbedtls_sources_location}}/{{mbedtls_folder}}"
+#    state: directory
+  
+# tar xvzf mbedtls-2.x.0-gpl.tgz
+- name: Extract mbedtls-2.x.0-gpl.tgz
+  become: yes
+  unarchive: 
+    copy: no
+    src: "{{mbedtls_sources_location}}/{{mbedtls_file}}"
+    dest: "{{mbedtls_sources_location}}"
+
+- name: Compile mbedtls-2.x.0-gpl
+  command: "make"
+  args:
+    chdir: "{{mbedtls_src_folder}}"
+  register: compile
+  become: true
+  tags: [mbedtls, install]
+
+- debug: msg="{{ compile.stdout_lines }}"
+- debug: msg="{{ compile.stderr_lines }}"
+
+# Install compiled mbedtls
+# This operation must be executed as sudo user
+#
+- name: Install compiled mbedtls
+  command: make install
+  args:
+    chdir: "{{mbedtls_src_folder}}"
+  register: install
+  tags: [mbedtls, install]
+
+- debug: msg="{{ install.stdout_lines }}"
+- debug: msg="{{ install.stderr_lines }}"
+
+- name: Cleanup downloaded sources after installation
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{mbedtls_src_folder}}"
+  when: "mbedtls_cleanup_after_install == true"
+  tags: [mbedtls, install]

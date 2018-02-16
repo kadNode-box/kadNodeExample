@@ -18,7 +18,14 @@
     ignore_errors: yes
 
   roles:
+   #  build and install git from source
    #- { role: git-install}
+   
+   #   install mbedtls if not existing for compiling kadNode
+   #   see OS specific script
+   - { role: mbedtls , mbedtls_version="2.7.0", mbedtls_file_sha1="6c8e62985c5a73318d391e1327830b3ff85f87a0" }
+
+   # compile spezific version with kadNode_git_commit
    - { role: kadNode , kadNode_git_commit="f164bdf"}
 
   tasks:

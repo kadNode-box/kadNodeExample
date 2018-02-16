@@ -1,0 +1,11 @@
+---
+#
+# install mbedtls for compiling kadNode
+#
+# CentOS
+# schwerwiegender Fehler: mbedtls/platform.h: Datei oder Verzeichnis nicht gefunden\n #include \"mbedtls/platform.h\"\n  
+
+
+- debug: msg="ansible_distribution= {{ansible_distribution}}"
+
+- include_tasks: "{{ansible_distribution}}.yml"

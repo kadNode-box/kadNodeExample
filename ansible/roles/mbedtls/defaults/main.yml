@@ -1,0 +1,25 @@
+---
+#
+#
+#
+
+# Version of mbedtls that should be present in the system
+mbedtls_version: "2.7.0"
+mbedtls_file: "mbedtls-{{mbedtls_version}}-gpl.tgz"
+mbedtls_src_url: "https://tls.mbed.org/download/{{mbedtls_file}}"
+mbedtls_file_sha1: "6c8e62985c5a73318d391e1327830b3ff85f87a0"
+
+# Location of files for mbedtls sources
+mbedtls_sources_location: /usr/src
+mbedtls_src_folder: "{{mbedtls_sources_location}}/mbedtls-{{mbedtls_version}}"
+
+# User that will build mbedtls. Please never use root account for compiling software. It can lead to serious issues
+mbedtls_build_user: vagrant
+
+# Group of the build user.
+mbedtls_build_group: vagrant
+
+# Installation path for mbedtls
+mbedtls_install_path: /usr/local
+
+mbedtls_cleanup_after_install: yes

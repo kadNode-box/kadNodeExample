@@ -1,0 +1,19 @@
+
+
+ yum -y install yum-utils
+ 
+repoquery --list mbedtls-2.6.0-1.el7.x86_64.rpm
+
+repoquery --installed -l mbedtls
+
+ repoquery --installed -l mbedtls
+/usr/lib64/libmbedcrypto.so.0
+/usr/lib64/libmbedcrypto.so.2.6.0
+/usr/lib64/libmbedtls.so.10
+/usr/lib64/libmbedtls.so.2.6.0
+/usr/lib64/libmbedx509.so.0
+/usr/lib64/libmbedx509.so.2.6.0
+/usr/share/doc/mbedtls
+/usr/share/doc/mbedtls/ChangeLog
+/usr/share/licenses/mbedtls
+/usr/share/licenses/mbedtls/LICENSE

@@ -1,0 +1,15 @@
+---
+#
+# Install Ubuntu spezific mbedtls 
+#
+- name: Install required libmbedtls-dev for compiling kadNode
+  package:
+    name: "{{ item }}"
+    state: latest
+  ignore_errors: yes
+  with_items:
+    - libmbedtls-dev
+    
+#
+#
+# apt-file list libmbedtls-dev

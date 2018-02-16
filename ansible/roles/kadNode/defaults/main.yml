@@ -1,6 +1,6 @@
 ---
 #
-# Set default values for varibles
+# Set default values 
 #
 
 kadNode_git_commit: "f164bdf"
@@ -13,10 +13,10 @@ kadNode_version: "2.14.1"
 kadNode_sources_location: /usr/src
 
 # User that will build kadNode. Please never use root account for compiling software. It can lead to serious issues
-kadNode_build_user: developer
+kadNode_build_user: vagrant
 
 # Group of the build user.
-kadNode_build_group: developer
+kadNode_build_group: vagrant
 
 # Installation path for kadNode
 kadNode_install_path: /usr/local
